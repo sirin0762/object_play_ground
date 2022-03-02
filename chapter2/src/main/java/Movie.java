@@ -5,9 +5,9 @@ public class Movie {
     private String title;
     private Duration duration;
     private Money fee;
-    private DiscountPolicy discountPolicy;
+    private DefaultDiscountPolicy discountPolicy;
 
-    public Movie(String title, Duration duration, Money fee, DiscountPolicy discountPolicy) {
+    public Movie(String title, Duration duration, Money fee, DefaultDiscountPolicy discountPolicy) {
         this.title = title;
         this.duration = duration;
         this.fee = fee;
@@ -19,7 +19,7 @@ public class Movie {
     }
 
     public Money calculateMovieFee(Screening screening) {
-        return fee.minus(discountPolicy.calculateDiscountAmount(screening));
+        return fee.minus(this.discountPolicy.calculateDiscountAmount(screening));
     }
 
 }
