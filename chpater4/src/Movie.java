@@ -12,6 +12,27 @@ public class Movie {
     private Money discountAmount;
     private double discountPercent;
 
+    public Money calculateAmountDiscountedFee() {
+        if (this.movieType != MovieType.AMOUNT_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+        return fee.minus(discountAmount);
+    }
+
+    public Money calculatePercentDiscountedFee() {
+        if (this.movieType != MovieType.PERCENT_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+        return fee.minus(fee.times(discountPercent));
+    }
+
+    public Money calculateNoneDiscountedFee() {
+        if (this.movieType != MovieType.NODE_DISCOUNT) {
+            throw new IllegalArgumentException();
+        }
+        return fee;
+    }
+
     public String getTitle() {
         return title;
     }
